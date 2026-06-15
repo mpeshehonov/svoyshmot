@@ -19,3 +19,10 @@ export {
   resolveCity,
   resolveCityFromGeoHeader,
 } from "./cities";
+
+export {
+  SELLER_COPY,
+  SELLER_KINDS,
+  getSellerKindLabel,
+  type SellerKind,
+} from "./seller";

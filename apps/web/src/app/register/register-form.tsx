@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
+import { SELLER_COPY } from "@svoyshmot/shared";
 import { signUp } from "@/lib/actions/auth";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,7 @@ export function RegisterForm({
   return (
     <AuthShell
       title="Создай аккаунт"
-      description="Клиент или ателье — выбери роль при регистрации"
+      description={`Клиент или ${SELLER_COPY.one.toLowerCase()} — выбери, как будешь пользоваться платформой`}
       footer={
         <>
           Уже есть аккаунт?{" "}
@@ -40,7 +41,7 @@ export function RegisterForm({
       <Tabs defaultValue={defaultTab}>
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="client">Я клиент</TabsTrigger>
-          <TabsTrigger value="atelier">Я ателье</TabsTrigger>
+          <TabsTrigger value="atelier">Я {SELLER_COPY.one.toLowerCase()}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="client">
@@ -71,10 +72,12 @@ export function RegisterForm({
               >
                 Войдите
               </Link>{" "}
-              и создайте профиль мастерской — новый аккаунт не нужен.
+              и создайте профиль ({SELLER_COPY.typesShort}) — новый аккаунт не
+              нужен.
             </p>
             <p className="text-xs text-muted-foreground">
-              После подтверждения email заполнишь профиль мастерской.
+              После подтверждения email заполнишь профиль: тип, название,
+              город.
             </p>
             {atelierState?.error ? (
               <p className="text-sm text-destructive">{atelierState.error}</p>
@@ -83,7 +86,7 @@ export function RegisterForm({
               <p className="text-sm text-primary">{atelierState.success}</p>
             ) : null}
             <Button type="submit" className="w-full" disabled={atelierPending}>
-              {atelierPending ? "Создаём..." : "Зарегистрировать ателье"}
+              {atelierPending ? "Создаём..." : SELLER_COPY.connectAction}
             </Button>
           </form>
         </TabsContent>

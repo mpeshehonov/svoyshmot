@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { APP_NAME } from "@svoyshmot/shared";
+import { APP_NAME, SELLER_COPY } from "@svoyshmot/shared";
 import { Scissors } from "lucide-react";
 import { getProfile } from "@/lib/auth";
 import { getUserCity } from "@/lib/city";
@@ -28,7 +28,7 @@ export async function SiteHeader() {
             Лента
           </Link>
           <Link href="/atelier" className="transition hover:text-foreground">
-            Для ателье
+            {SELLER_COPY.nav}
           </Link>
         </nav>
 

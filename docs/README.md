@@ -10,7 +10,7 @@
 | [CUSTOMER_DISCOVERY.md](./CUSTOMER_DISCOVERY.md) | План интервью с клиентами и ателье |
 | [PMF_DASHBOARD.md](./PMF_DASHBOARD.md) | Метрики product-market fit, цели, false positives |
 | [SECURITY.md](./SECURITY.md) | Чеклист безопасности перед онбордингом |
-| [SUPABASE_AUTH.md](./SUPABASE_AUTH.md) | Site URL, redirect, письма подтверждения |
+| [TERMINOLOGY.md](./TERMINOLOGY.md) | Продавец vs ателье в UI и коде |
 | [STAGE2_AI.md](./STAGE2_AI.md) | План AI-генерации изображений (после первых заказов) |
 
 ## Быстрые команды

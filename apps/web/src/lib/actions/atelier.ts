@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { resolveCity } from "@svoyshmot/shared";
+import type { SellerKind } from "@svoyshmot/shared";
+import { SELLER_KINDS } from "@svoyshmot/shared";
 import { createClient } from "@/lib/supabase/server";
 
 export async function registerAtelier(
@@ -19,9 +21,13 @@ export async function registerAtelier(
   const name = String(formData.get("name") ?? "").trim();
   const cityRaw = String(formData.get("city") ?? "").trim();
   const city = resolveCity(cityRaw);
+  const sellerKindRaw = String(formData.get("seller_kind") ?? "atelier");
+  const sellerKind = SELLER_KINDS.some((k) => k.value === sellerKindRaw)
+    ? (sellerKindRaw as SellerKind)
+    : "atelier";
   const description = String(formData.get("description") ?? "").trim();
 
-  if (name.length < 2) return { error: "Название ателье — минимум 2 символа" };
+  if (name.length < 2) return { error: "Название — минимум 2 символа" };
   if (!city) return { error: "Укажите корректный город" };
   if (description.length < 20) {
     return { error: "Описание — минимум 20 символов" };
@@ -34,7 +40,7 @@ export async function registerAtelier(
     .maybeSingle();
 
   if (existing) {
-    return { error: "У вас уже есть профиль ателье" };
+    return { error: "У вас уже есть профиль продавца" };
   }
 
   const { error: profileError } = await supabase
@@ -50,10 +56,11 @@ export async function registerAtelier(
     owner_id: user.id,
     name,
     city,
+    seller_kind: sellerKind,
     description,
   });
 
-  if (error) return { error: "Не удалось создать профиль ателье" };
+  if (error) return { error: "Не удалось создать профиль продавца" };
 
   revalidatePath("/", "layout");
   redirect("/atelier/dashboard");
@@ -86,7 +93,7 @@ export async function submitBid(
     .eq("owner_id", user.id)
     .single();
 
-  if (!atelier) return { error: "Сначала зарегистрируйте ателье" };
+  if (!atelier) return { error: "Сначала зарегистрируйте профиль продавца" };
 
   const { data: order } = await supabase
     .from("orders")
@@ -99,7 +106,9 @@ export async function submitBid(
   }
 
   if (order.city && atelier.city && order.city !== atelier.city) {
-    return { error: `Этот заказ из города «${order.city}». Ваше ателье в «${atelier.city}».` };
+    return {
+      error: `Этот заказ из города «${order.city}». Ваш профиль в «${atelier.city}».`,
+    };
   }
 
   const { error } = await supabase.from("order_bids").insert({

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Sparkles, Wand2 } from "lucide-react";
-import { APP_TAGLINE } from "@svoyshmot/shared";
+import { APP_TAGLINE, SELLER_COPY } from "@svoyshmot/shared";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,8 +45,8 @@ export function HeroPrompt() {
           </h1>
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Опиши свой шмот — ИИ накидает варианты, ателье сшьёт. Не с полки,
-            а твой.
+            Опиши свой шмот — ИИ накидает варианты, {SELLER_COPY.toMany} сшьют.
+            Не с полки, а твой.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3 text-sm text-muted-foreground">
@@ -54,7 +54,7 @@ export function HeroPrompt() {
               4 варианта за раз
             </span>
             <span className="rounded-full border border-border bg-card/60 px-3 py-1">
-              Чат с ателье
+              Чат с {SELLER_COPY.withOne}
             </span>
             <span className="rounded-full border border-border bg-card/60 px-3 py-1">
               Лента идей

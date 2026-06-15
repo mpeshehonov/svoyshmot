@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { SELLER_COPY } from "@svoyshmot/shared";
 import { SiteHeader } from "@/components/layout/site-header";
 import { getAtelierOnboardingPath } from "@/lib/atelier-routing";
 import { Button } from "@/components/ui/button";
@@ -18,15 +19,12 @@ export default async function AtelierLandingPage() {
       <main className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <Card className="border-border/70 bg-card/70">
           <CardContent className="space-y-6 py-10 text-center">
-            <h1 className="text-3xl font-semibold">Ателье на СвойШмот</h1>
-            <p className="text-muted-foreground">
-              Получайте заказы с готовым описанием и визуалом. Отправляйте цену
-              и срок — клиент выберет лучшее предложение. Общайтесь в чате без
-              звонков.
-            </p>
+            <h1 className="text-3xl font-semibold">{SELLER_COPY.landingTitle}</h1>
+            <p className="text-muted-foreground">{SELLER_COPY.landingLead}</p>
+            <p className="text-sm text-muted-foreground">{SELLER_COPY.typesHint}</p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild>
-                <Link href="/register?role=atelier">Подключить ателье</Link>
+                <Link href="/register?role=atelier">{SELLER_COPY.connectAction}</Link>
               </Button>
               <Button asChild variant="secondary">
                 <Link href="/login?next=/atelier/register">
@@ -35,8 +33,8 @@ export default async function AtelierLandingPage() {
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">
-              С аккаунтом клиента можно стать ателье — после входа откроется
-              форма профиля мастерской.
+              С аккаунтом клиента можно {SELLER_COPY.become.toLowerCase()} — после
+              входа откроется форма профиля ({SELLER_COPY.typesShort}).
             </p>
           </CardContent>
         </Card>

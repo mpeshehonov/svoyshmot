@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { SELLER_COPY } from "@svoyshmot/shared";
 import { SiteHeader } from "@/components/layout/site-header";
 import { OrderChat } from "@/components/orders/order-chat";
 import { OrderStatusBadge } from "@/components/orders/order-status-badge";
@@ -64,7 +65,7 @@ export default async function AtelierOrderPage({
       <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
         <p className="text-sm text-muted-foreground">
           <Link href="/atelier/dashboard" className="hover:text-foreground">
-            ← Кабинет ателье
+            ← {SELLER_COPY.cabinet}
           </Link>
         </p>
         <h1 className="mt-2 text-2xl font-semibold">

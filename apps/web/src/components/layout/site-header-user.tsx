@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { LayoutDashboard, LogOut, Plus, User } from "lucide-react";
+import { SELLER_COPY } from "@svoyshmot/shared";
 import { signOut } from "@/lib/actions/auth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -64,7 +65,7 @@ export function SiteHeaderUser({
             <DropdownMenuItem asChild>
               <Link href="/atelier/register">
                 <LayoutDashboard className="size-4" />
-                Стать ателье
+                {SELLER_COPY.become}
               </Link>
             </DropdownMenuItem>
           )}

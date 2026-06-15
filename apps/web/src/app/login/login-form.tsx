@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
+import { SELLER_COPY } from "@svoyshmot/shared";
 import { signIn } from "@/lib/actions/auth";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,7 @@ export function LoginForm() {
       title="С возвращением"
       description={
         isAtelierFlow
-          ? "Войди в существующий аккаунт — дальше создашь профиль ателье"
+          ? `Войди в существующий аккаунт — дальше создашь ${SELLER_COPY.profile.toLowerCase()}`
           : "Войди, чтобы сохранять дизайны и оформлять заказы"
       }
       footer={

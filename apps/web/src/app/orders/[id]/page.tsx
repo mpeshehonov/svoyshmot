@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { OrderChat } from "@/components/orders/order-chat";
 import { OrderStatusBadge } from "@/components/orders/order-status-badge";
 import { acceptBid, publishOrder, updateOrderStatus } from "@/lib/actions/orders";
+import { SELLER_COPY } from "@svoyshmot/shared";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
@@ -100,7 +101,7 @@ export default async function OrderPage({
               ) : null}
               {order.ateliers ? (
                 <Row
-                  label="Ателье"
+                  label={SELLER_COPY.orderLabel}
                   value={relationOne<{ name: string }>(order.ateliers)?.name ?? "—"}
                 />
               ) : null}
@@ -111,10 +112,10 @@ export default async function OrderPage({
             {order.status === "draft" ? (
               <form action={publishAction}>
                 <p className="mb-3 text-sm text-muted-foreground">
-                  Заказ увидят ателье в городе {order.city ?? "—"}.
+                  {SELLER_COPY.orderPublishHint(order.city ?? "—")}
                 </p>
                 <Button type="submit" className="w-full">
-                  Опубликовать для ателье
+                  {SELLER_COPY.publishButton}
                 </Button>
               </form>
             ) : null}
@@ -122,12 +123,12 @@ export default async function OrderPage({
             {order.status === "published" && (
               <Card className="border-border/70 bg-card/70">
                 <CardHeader>
-                  <CardTitle className="text-base">Предложения ателье</CardTitle>
+                  <CardTitle className="text-base">{SELLER_COPY.bidsTitle}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {!bids?.length ? (
                     <p className="text-sm text-muted-foreground">
-                      Пока нет предложений. Ателье увидят заказ в своём кабинете.
+                      {SELLER_COPY.bidsEmpty}
                     </p>
                   ) : (
                     bids.map((bid) => {
@@ -159,7 +160,7 @@ export default async function OrderPage({
                           <form action={acceptBidAction} className="mt-3">
                             <input type="hidden" name="bid_id" value={bid.id} />
                             <Button type="submit" size="sm">
-                              Выбрать это ателье
+                              {SELLER_COPY.selectBid}
                             </Button>
                           </form>
                         ) : (

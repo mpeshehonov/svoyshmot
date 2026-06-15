@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
-import { designPrompt, relationOne } from "@/lib/supabase-relations";
+import { designPrompt } from "@/lib/supabase-relations";
+import { getSellerKindLabel, SELLER_COPY } from "@svoyshmot/shared";
 
 export default async function AtelierDashboardPage() {
   const supabase = await createClient();
@@ -23,7 +24,7 @@ export default async function AtelierDashboardPage() {
 
   const { data: atelier } = await supabase
     .from("ateliers")
-    .select("id, name, city, rating")
+    .select("id, name, city, rating, seller_kind")
     .eq("owner_id", user.id)
     .maybeSingle();
 
@@ -54,10 +55,11 @@ export default async function AtelierDashboardPage() {
       <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-sm text-muted-foreground">Кабинет ателье</p>
+            <p className="text-sm text-muted-foreground">{SELLER_COPY.cabinet}</p>
             <h1 className="mt-1 text-3xl font-semibold">{atelier.name}</h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              {atelier.city} · рейтинг {atelier.rating}
+              {getSellerKindLabel(atelier.seller_kind)} · {atelier.city} · рейтинг{" "}
+              {atelier.rating}
             </p>
           </div>
         </div>

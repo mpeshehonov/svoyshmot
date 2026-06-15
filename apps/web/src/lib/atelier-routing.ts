@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-/** Куда направить пользователя в контексте онбординга ателье */
+/** Куда направить пользователя в контексте онбординга продавца */
 export async function getAtelierOnboardingPath(): Promise<string | null> {
   const supabase = await createClient();
   const {

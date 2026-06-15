@@ -1,4 +1,5 @@
 import { Palette, Scissors, Store, Wand2 } from "lucide-react";
+import { SELLER_COPY } from "@svoyshmot/shared";
 import { Card, CardContent } from "@/components/ui/card";
 
 const steps = [
@@ -15,8 +16,8 @@ const steps = [
   },
   {
     icon: Store,
-    title: "Выбери ателье",
-    description: "Сравни цену, срок и отзывы. Откликнутся лучшие мастера.",
+    title: `Выбери ${SELLER_COPY.ofOne}`,
+    description: "Сравни цену, срок и рейтинг. Откликнутся подходящие мастерские и бренды.",
   },
   {
     icon: Scissors,

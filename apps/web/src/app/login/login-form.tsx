@@ -14,11 +14,11 @@ export function LoginForm() {
   const searchParams = useSearchParams();
   const next = searchParams.get("next") ?? "";
   const authError = searchParams.get("error");
-  const isAtelierFlow = next === "/atelier/register";
+  const isSellerFlow = next === "/seller/register";
 
   const [state, formAction, pending] = useActionState(signIn, null);
 
-  const registerHref = isAtelierFlow
+  const registerHref = isSellerFlow
     ? "/register?role=atelier"
     : "/register";
 
@@ -26,7 +26,7 @@ export function LoginForm() {
     <AuthShell
       title="С возвращением"
       description={
-        isAtelierFlow
+        isSellerFlow
           ? `Войди в существующий аккаунт — дальше создашь ${SELLER_COPY.profile.toLowerCase()}`
           : "Войди, чтобы сохранять дизайны и оформлять заказы"
       }

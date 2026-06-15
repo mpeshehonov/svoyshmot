@@ -29,7 +29,7 @@ svoyshmot/
 │   ├── src/app/              # routes, server components
 │   ├── src/components/       # UI, landing, orders
 │   ├── src/lib/
-│   │   ├── actions/          # Server Actions (auth, orders, atelier, messages, designs)
+│   │   ├── actions/          # Server Actions (auth, orders, seller, messages, designs)
 │   │   ├── supabase/         # browser, server, middleware clients
 │   │   ├── auth.ts           # getSessionUser, getProfile (server only)
 │   │   ├── auth-errors.ts    # RU validation + Supabase error translation
@@ -51,9 +51,9 @@ svoyshmot/
 
 ### Ателье
 
-1. `/register` (role=atelier) → `/atelier/register` (профиль `ateliers`)
-2. `/atelier/dashboard` → лента `published` + свои заказы
-3. `/atelier/orders/[id]` → ставка → после accept: статусы + чат
+1. `/register` (role=atelier) → `/seller/register` (профиль `ateliers`)
+2. `/seller/dashboard` → лента `published` + свои заказы
+3. `/seller/orders/[id]` → ставка → после accept: статусы + чат
 
 ### Order status machine
 

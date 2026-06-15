@@ -117,7 +117,7 @@ export async function publishOrder(orderId: string) {
   if (error) return { error: "Не удалось опубликовать заказ" };
 
   revalidatePath(`/orders/${orderId}`);
-  revalidatePath("/atelier/dashboard");
+  revalidatePath("/seller/dashboard");
   return { success: true };
 }
 
@@ -173,7 +173,7 @@ export async function acceptBid(bidId: string, orderId: string) {
     .neq("id", bidId);
 
   revalidatePath(`/orders/${orderId}`);
-  revalidatePath("/atelier/dashboard");
+  revalidatePath("/seller/dashboard");
   return { success: true };
 }
 
@@ -226,6 +226,6 @@ export async function updateOrderStatus(
   if (error) return { error: "Не удалось обновить статус" };
 
   revalidatePath(`/orders/${orderId}`);
-  revalidatePath(`/atelier/orders/${orderId}`);
+  revalidatePath(`/seller/orders/${orderId}`);
   return { success: true };
 }

@@ -24,7 +24,7 @@ export default function Home() {
               {SELLER_COPY.landingLead} {SELLER_COPY.typesHint}
             </p>
             <Button className="mt-6" variant="secondary" asChild>
-              <Link href="/atelier">{SELLER_COPY.become}</Link>
+              <Link href="/seller">{SELLER_COPY.become}</Link>
             </Button>
           </div>
         </section>

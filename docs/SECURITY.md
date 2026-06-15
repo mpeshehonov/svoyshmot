@@ -26,7 +26,7 @@
 ## Server Actions
 
 - [x] Actions проверяют `getUser()` перед мутациями
-- [x] Дополнительные проверки owner/atelier на критичных операциях (accept bid, status)
+- [x] Дополнительные проверки owner/seller на критичных операциях (accept bid, status)
 - [ ] Идемпотентность accept bid (повторный submit)
 - [ ] Валидация входных данных (zod) — желательно, сейчас FormData + ручная валидация
 

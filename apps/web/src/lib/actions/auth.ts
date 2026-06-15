@@ -35,7 +35,7 @@ export async function signUp(
   if (nameError) return { error: nameError };
 
   const supabase = await createClient();
-  const nextPath = role === "atelier" ? "/atelier/register" : "/dashboard";
+  const nextPath = role === "atelier" ? "/seller/register" : "/dashboard";
 
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -60,7 +60,7 @@ export async function signUp(
   }
 
   if (role === "atelier") {
-    redirect("/atelier/register");
+    redirect("/seller/register");
   }
 
   redirect("/dashboard");

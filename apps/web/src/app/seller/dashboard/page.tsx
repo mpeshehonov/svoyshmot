@@ -29,7 +29,7 @@ export default async function AtelierDashboardPage() {
     .maybeSingle();
 
   if (!atelier) {
-    redirect("/atelier/register");
+    redirect("/seller/register");
   }
 
   const [{ data: published }, { data: active }] = await Promise.all([
@@ -80,7 +80,7 @@ export default async function AtelierDashboardPage() {
           ) : (
             <div className="grid gap-3">
               {published.map((order) => (
-                <Link key={order.id} href={`/atelier/orders/${order.id}`}>
+                <Link key={order.id} href={`/seller/orders/${order.id}`}>
                   <Card className="transition hover:border-primary/30">
                     <CardContent className="flex items-center justify-between py-4">
                       <p className="font-medium">
@@ -104,7 +104,7 @@ export default async function AtelierDashboardPage() {
           ) : (
             <div className="grid gap-3">
               {active.map((order) => (
-                <Link key={order.id} href={`/atelier/orders/${order.id}`}>
+                <Link key={order.id} href={`/seller/orders/${order.id}`}>
                   <Card className="transition hover:border-primary/30">
                     <CardContent className="flex items-center justify-between gap-4 py-4">
                       <div>

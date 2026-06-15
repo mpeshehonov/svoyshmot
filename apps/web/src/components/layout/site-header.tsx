@@ -27,7 +27,7 @@ export async function SiteHeader() {
           <Link href="/#feed" className="transition hover:text-foreground">
             Лента
           </Link>
-          <Link href="/atelier" className="transition hover:text-foreground">
+          <Link href="/seller" className="transition hover:text-foreground">
             {SELLER_COPY.nav}
           </Link>
         </nav>

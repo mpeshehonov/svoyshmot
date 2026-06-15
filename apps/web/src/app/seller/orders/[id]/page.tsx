@@ -28,7 +28,7 @@ export default async function AtelierOrderPage({
     .eq("owner_id", user.id)
     .single();
 
-  if (!atelier) redirect("/atelier/register");
+  if (!atelier) redirect("/seller/register");
 
   const { data: order } = await supabase
     .from("orders")
@@ -36,12 +36,12 @@ export default async function AtelierOrderPage({
     .eq("id", id)
     .single();
 
-  if (!order) redirect("/atelier/dashboard");
+  if (!order) redirect("/seller/dashboard");
 
   const canView =
     order.atelier_id === atelier.id ||
     (order.status === "published" && order.city === atelier.city);
-  if (!canView) redirect("/atelier/dashboard");
+  if (!canView) redirect("/seller/dashboard");
 
   const { data: myBid } = await supabase
     .from("order_bids")
@@ -64,7 +64,7 @@ export default async function AtelierOrderPage({
       <SiteHeader />
       <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
         <p className="text-sm text-muted-foreground">
-          <Link href="/atelier/dashboard" className="hover:text-foreground">
+          <Link href="/seller/dashboard" className="hover:text-foreground">
             ← {SELLER_COPY.cabinet}
           </Link>
         </p>

@@ -10,9 +10,9 @@ const protectedPaths = [
   "/dashboard",
   "/create",
   "/orders",
-  "/atelier/dashboard",
-  "/atelier/orders",
-  "/atelier/register",
+  "/seller/dashboard",
+  "/seller/orders",
+  "/seller/register",
 ];
 
 export async function middleware(request: NextRequest) {

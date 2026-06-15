@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { SELLER_COPY, SELLER_KINDS } from "@svoyshmot/shared";
-import { registerAtelier } from "@/lib/actions/atelier";
+import { registerSeller } from "@/lib/actions/seller";
 import { AuthShell } from "@/components/auth/auth-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,8 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 const selectClassName =
   "flex h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:bg-input/30";
 
-export function AtelierRegisterForm({ defaultCity }: { defaultCity: string }) {
-  const [state, formAction, pending] = useActionState(registerAtelier, null);
+export function SellerRegisterForm({ defaultCity }: { defaultCity: string }) {
+  const [state, formAction, pending] = useActionState(registerSeller, null);
 
   return (
     <AuthShell

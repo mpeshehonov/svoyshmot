@@ -31,7 +31,7 @@ export function SiteHeaderUser({
   return (
     <div className="flex items-center gap-2">
       <Button size="sm" className="hidden sm:inline-flex" asChild>
-        <Link href={role === "atelier" ? "/atelier/dashboard" : "/create"}>
+        <Link href={role === "atelier" ? "/seller/dashboard" : "/create"}>
           <Plus className="size-4" />
           {role === "atelier" ? "Заказы" : "Создать"}
         </Link>
@@ -48,7 +48,7 @@ export function SiteHeaderUser({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-48">
           <DropdownMenuItem asChild>
-            <Link href={role === "atelier" ? "/atelier/dashboard" : "/dashboard"}>
+            <Link href={role === "atelier" ? "/seller/dashboard" : "/dashboard"}>
               <LayoutDashboard className="size-4" />
               Кабинет
             </Link>
@@ -63,7 +63,7 @@ export function SiteHeaderUser({
           )}
           {role === "atelier" ? null : (
             <DropdownMenuItem asChild>
-              <Link href="/atelier/register">
+              <Link href="/seller/register">
                 <LayoutDashboard className="size-4" />
                 {SELLER_COPY.become}
               </Link>

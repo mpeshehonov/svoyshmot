@@ -29,6 +29,6 @@ export async function sendMessage(
   if (error) return { error: "Не удалось отправить сообщение" };
 
   revalidatePath(`/orders/${orderId}`);
-  revalidatePath(`/atelier/orders/${orderId}`);
+  revalidatePath(`/seller/orders/${orderId}`);
   return { success: true };
 }

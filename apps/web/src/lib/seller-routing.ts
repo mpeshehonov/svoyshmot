@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
 /** Куда направить пользователя в контексте онбординга продавца */
-export async function getAtelierOnboardingPath(): Promise<string | null> {
+export async function getSellerOnboardingPath(): Promise<string | null> {
   const supabase = await createClient();
   const {
     data: { user },
@@ -16,7 +16,7 @@ export async function getAtelierOnboardingPath(): Promise<string | null> {
     .eq("owner_id", user.id)
     .maybeSingle();
 
-  if (atelier) return "/atelier/dashboard";
+  if (atelier) return "/seller/dashboard";
 
-  return "/atelier/register";
+  return "/seller/register";
 }

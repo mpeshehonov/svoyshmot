@@ -28,7 +28,7 @@ export function RegisterForm({
           <Link
             href={
               defaultTab === "atelier"
-                ? "/login?next=/atelier/register"
+                ? "/login?next=/seller/register"
                 : "/login"
             }
             className="text-primary hover:underline"
@@ -67,7 +67,7 @@ export function RegisterForm({
             <p className="text-xs text-muted-foreground">
               Уже регистрировались как клиент?{" "}
               <Link
-                href="/login?next=/atelier/register"
+                href="/login?next=/seller/register"
                 className="text-primary hover:underline"
               >
                 Войдите

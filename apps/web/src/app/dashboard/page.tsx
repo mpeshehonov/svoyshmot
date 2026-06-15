@@ -35,7 +35,7 @@ export default async function DashboardPage() {
     ]);
 
   if (profile?.role === "atelier") {
-    redirect("/atelier/dashboard");
+    redirect("/seller/dashboard");
   }
 
   return (

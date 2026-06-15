@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { getAtelierOnboardingPath } from "@/lib/atelier-routing";
+import { getSellerOnboardingPath } from "@/lib/seller-routing";
 import { LoginForm } from "./login-form";
 
 type PageProps = {
@@ -19,9 +19,9 @@ export default async function LoginPage({ searchParams }: PageProps) {
     if (next?.startsWith("/")) {
       redirect(next);
     }
-    const atelierPath = await getAtelierOnboardingPath();
-    if (atelierPath === "/atelier/dashboard") {
-      redirect("/atelier/dashboard");
+    const atelierPath = await getSellerOnboardingPath();
+    if (atelierPath === "/seller/dashboard") {
+      redirect("/seller/dashboard");
     }
     redirect("/dashboard");
   }

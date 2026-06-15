@@ -7,7 +7,7 @@ import type { SellerKind } from "@svoyshmot/shared";
 import { SELLER_KINDS } from "@svoyshmot/shared";
 import { createClient } from "@/lib/supabase/server";
 
-export async function registerAtelier(
+export async function registerSeller(
   _prev: { error?: string } | null,
   formData: FormData,
 ) {
@@ -63,7 +63,7 @@ export async function registerAtelier(
   if (error) return { error: "Не удалось создать профиль продавца" };
 
   revalidatePath("/", "layout");
-  redirect("/atelier/dashboard");
+  redirect("/seller/dashboard");
 }
 
 export async function submitBid(
@@ -126,7 +126,7 @@ export async function submitBid(
     return { error: "Не удалось отправить предложение" };
   }
 
-  revalidatePath(`/atelier/orders/${orderId}`);
-  revalidatePath("/atelier/dashboard");
+  revalidatePath(`/seller/orders/${orderId}`);
+  revalidatePath("/seller/dashboard");
   return { success: true };
 }

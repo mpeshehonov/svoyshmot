@@ -2,12 +2,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SELLER_COPY } from "@svoyshmot/shared";
 import { SiteHeader } from "@/components/layout/site-header";
-import { getAtelierOnboardingPath } from "@/lib/atelier-routing";
+import { getSellerOnboardingPath } from "@/lib/seller-routing";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default async function AtelierLandingPage() {
-  const onboardingPath = await getAtelierOnboardingPath();
+  const onboardingPath = await getSellerOnboardingPath();
 
   if (onboardingPath) {
     redirect(onboardingPath);
@@ -27,7 +27,7 @@ export default async function AtelierLandingPage() {
                 <Link href="/register?role=atelier">{SELLER_COPY.connectAction}</Link>
               </Button>
               <Button asChild variant="secondary">
-                <Link href="/login?next=/atelier/register">
+                <Link href="/login?next=/seller/register">
                   Уже есть аккаунт — войти
                 </Link>
               </Button>

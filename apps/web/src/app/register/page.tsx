@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { getAtelierOnboardingPath } from "@/lib/atelier-routing";
+import { getSellerOnboardingPath } from "@/lib/seller-routing";
 import { RegisterForm } from "./register-form";
 
 type PageProps = {
@@ -15,12 +15,12 @@ export default async function RegisterPage({ searchParams }: PageProps) {
   } = await supabase.auth.getUser();
 
   if (user) {
-    const atelierPath = await getAtelierOnboardingPath();
-    if (role === "atelier" || atelierPath === "/atelier/register") {
-      redirect("/atelier/register");
+    const atelierPath = await getSellerOnboardingPath();
+    if (role === "atelier" || atelierPath === "/seller/register") {
+      redirect("/seller/register");
     }
-    if (atelierPath === "/atelier/dashboard") {
-      redirect("/atelier/dashboard");
+    if (atelierPath === "/seller/dashboard") {
+      redirect("/seller/dashboard");
     }
     redirect("/dashboard");
   }

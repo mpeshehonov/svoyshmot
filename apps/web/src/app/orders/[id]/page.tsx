@@ -85,6 +85,7 @@ export default async function OrderPage({
               <CardTitle className="text-base">Детали заказа</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
+              <Row label="Город" value={order.city ?? "—"} />
               <Row label="Размер" value={order.size} />
               <Row label="Пол" value={order.gender} />
               <Row label="Цвет" value={order.color} />
@@ -109,6 +110,9 @@ export default async function OrderPage({
           <div className="space-y-4">
             {order.status === "draft" ? (
               <form action={publishAction}>
+                <p className="mb-3 text-sm text-muted-foreground">
+                  Заказ увидят ателье в городе {order.city ?? "—"}.
+                </p>
                 <Button type="submit" className="w-full">
                   Опубликовать для ателье
                 </Button>

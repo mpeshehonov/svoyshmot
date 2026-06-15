@@ -2,11 +2,13 @@ import Link from "next/link";
 import { APP_NAME } from "@svoyshmot/shared";
 import { Scissors } from "lucide-react";
 import { getProfile } from "@/lib/auth";
+import { getUserCity } from "@/lib/city";
+import { CitySelector } from "@/components/location/city-selector";
 import { SiteHeaderUser } from "./site-header-user";
 import { Button } from "@/components/ui/button";
 
 export async function SiteHeader() {
-  const profile = await getProfile();
+  const [profile, city] = await Promise.all([getProfile(), getUserCity()]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/75 backdrop-blur-xl">
@@ -31,6 +33,7 @@ export async function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <CitySelector currentCity={city} />
           {profile ? (
             <SiteHeaderUser
               name={profile.name ?? "Пользователь"}

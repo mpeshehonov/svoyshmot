@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getUserCity } from "@/lib/city";
 import { createClient } from "@/lib/supabase/server";
 
 export async function createDesign(prompt: string) {
@@ -71,11 +72,14 @@ export async function createOrder(
 
   if (!design) return { error: "Дизайн не найден" };
 
+  const city = await getUserCity();
+
   const { data, error } = await supabase
     .from("orders")
     .insert({
       user_id: user.id,
       design_id: designId,
+      city,
       size,
       gender,
       color,
@@ -101,9 +105,11 @@ export async function publishOrder(orderId: string) {
   } = await supabase.auth.getUser();
   if (!user) return { error: "Нужно войти" };
 
+  const city = await getUserCity();
+
   const { error } = await supabase
     .from("orders")
-    .update({ status: "published" })
+    .update({ status: "published", city })
     .eq("id", orderId)
     .eq("user_id", user.id)
     .eq("status", "draft");

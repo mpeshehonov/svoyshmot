@@ -1,4 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
+import {
+  CITY_COOKIE_NAME,
+  DEFAULT_CITY,
+  resolveCityFromGeoHeader,
+} from "@svoyshmot/shared";
 import { updateSession } from "@/lib/supabase/middleware";
 
 const protectedPaths = [
@@ -13,6 +18,18 @@ const protectedPaths = [
 export async function middleware(request: NextRequest) {
   const response = await updateSession(request);
   const { pathname } = request.nextUrl;
+
+  if (!request.cookies.get(CITY_COOKIE_NAME)?.value) {
+    const geoCity = resolveCityFromGeoHeader(
+      request.headers.get("x-vercel-ip-city"),
+    );
+    const city = geoCity ?? DEFAULT_CITY;
+    response.cookies.set(CITY_COOKIE_NAME, encodeURIComponent(city), {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: "lax",
+    });
+  }
 
   const isProtected = protectedPaths.some(
     (path) => pathname === path || pathname.startsWith(`${path}/`),

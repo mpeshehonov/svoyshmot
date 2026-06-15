@@ -34,8 +34,9 @@ export default async function AtelierDashboardPage() {
   const [{ data: published }, { data: active }] = await Promise.all([
     supabase
       .from("orders")
-      .select("id, status, created_at, designs(prompt)")
+      .select("id, status, created_at, city, designs(prompt)")
       .eq("status", "published")
+      .eq("city", atelier.city ?? "")
       .order("created_at", { ascending: false })
       .limit(20),
     supabase
@@ -65,11 +66,13 @@ export default async function AtelierDashboardPage() {
           <div className="mb-4 flex items-center gap-2">
             <h2 className="text-lg font-medium">Новые заказы</h2>
             <Badge variant="secondary">{published?.length ?? 0}</Badge>
+            <span className="text-xs text-muted-foreground">в {atelier.city}</span>
           </div>
           {!published?.length ? (
             <Card className="border-dashed bg-card/50">
               <CardContent className="py-8 text-center text-sm text-muted-foreground">
-                Нет открытых заказов. Клиенты публикуют заявки после оформления.
+                Нет открытых заказов в {atelier.city}. Клиенты публикуют заявки после
+                оформления.
               </CardContent>
             </Card>
           ) : (

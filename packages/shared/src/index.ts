@@ -11,3 +11,11 @@ export type OrderStatus =
 
 export const APP_NAME = "СвойШмот";
 export const APP_TAGLINE = "Придумай. Закажи. Носи свой шмот.";
+
+export {
+  CITY_COOKIE_NAME,
+  DEFAULT_CITY,
+  PREDEFINED_CITIES,
+  resolveCity,
+  resolveCityFromGeoHeader,
+} from "./cities";

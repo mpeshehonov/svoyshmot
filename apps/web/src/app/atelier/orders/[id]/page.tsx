@@ -23,7 +23,7 @@ export default async function AtelierOrderPage({
 
   const { data: atelier } = await supabase
     .from("ateliers")
-    .select("id, name, owner_id")
+    .select("id, name, owner_id, city")
     .eq("owner_id", user.id)
     .single();
 
@@ -38,7 +38,8 @@ export default async function AtelierOrderPage({
   if (!order) redirect("/atelier/dashboard");
 
   const canView =
-    order.status === "published" || order.atelier_id === atelier.id;
+    order.atelier_id === atelier.id ||
+    (order.status === "published" && order.city === atelier.city);
   if (!canView) redirect("/atelier/dashboard");
 
   const { data: myBid } = await supabase
@@ -79,6 +80,7 @@ export default async function AtelierOrderPage({
               <CardTitle className="text-base">Параметры заказа</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
+              <p>Город: {order.city ?? "—"}</p>
               <p>Размер: {order.size}</p>
               <p>Пол: {order.gender}</p>
               <p>Цвет: {order.color}</p>

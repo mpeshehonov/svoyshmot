@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { resolveCity } from "@svoyshmot/shared";
 import { createClient } from "@/lib/supabase/server";
 
 export async function registerAtelier(
@@ -16,11 +17,12 @@ export async function registerAtelier(
   if (!user) return { error: "Нужно войти в аккаунт" };
 
   const name = String(formData.get("name") ?? "").trim();
-  const city = String(formData.get("city") ?? "").trim();
+  const cityRaw = String(formData.get("city") ?? "").trim();
+  const city = resolveCity(cityRaw);
   const description = String(formData.get("description") ?? "").trim();
 
   if (name.length < 2) return { error: "Название ателье — минимум 2 символа" };
-  if (!city) return { error: "Укажите город" };
+  if (!city) return { error: "Укажите корректный город" };
   if (description.length < 20) {
     return { error: "Описание — минимум 20 символов" };
   }
@@ -37,7 +39,7 @@ export async function registerAtelier(
 
   const { error: profileError } = await supabase
     .from("profiles")
-    .update({ role: "atelier" })
+    .update({ role: "atelier", city })
     .eq("id", user.id);
 
   if (profileError) {
@@ -80,11 +82,25 @@ export async function submitBid(
 
   const { data: atelier } = await supabase
     .from("ateliers")
-    .select("id")
+    .select("id, city")
     .eq("owner_id", user.id)
     .single();
 
   if (!atelier) return { error: "Сначала зарегистрируйте ателье" };
+
+  const { data: order } = await supabase
+    .from("orders")
+    .select("status, city")
+    .eq("id", orderId)
+    .single();
+
+  if (!order || order.status !== "published") {
+    return { error: "Заказ недоступен для предложения" };
+  }
+
+  if (order.city && atelier.city && order.city !== atelier.city) {
+    return { error: `Этот заказ из города «${order.city}». Ваше ателье в «${atelier.city}».` };
+  }
 
   const { error } = await supabase.from("order_bids").insert({
     order_id: orderId,

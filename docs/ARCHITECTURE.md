@@ -97,10 +97,10 @@ draft → published → accepted → in_progress → ready → delivered
 
 | Таблица | Назначение |
 |---------|------------|
-| profiles | id = auth.users, role: client \| atelier \| admin |
+| profiles | id = auth.users, role, **city** |
 | ateliers | owner_id → profiles, city, rating |
 | designs | prompt, image_url (nullable), is_public |
-| orders | design_id, atelier_id (после accept), status, параметры пошива |
+| orders | design_id, atelier_id, **city**, status, параметры пошива |
 | order_bids | order_id + atelier_id unique, price, deadline |
 | messages | order_id, sender_id, text |
 
@@ -156,3 +156,4 @@ NEXT_PUBLIC_SITE_URL=https://svoyshmot.vercel.app   # localhost для dev
 | 2025-06-15 | order_bids отдельная таблица | Несколько ставок на заказ | Больше RLS | — |
 | 2025-06-15 | AI images отложены (Stage 2) | Проверить спрос без GPU-cost | Слабее «вау» на лендинге | STAGE2_AI.md |
 | 2025-06-15 | NEXT_PUBLIC_SITE_URL | Fix auth emails на preview URL | Ещё один env | Dashboard Site URL |
+| 2025-06-15 | city на profiles/orders | Локальный маркетплейс, пилот Сочи | Фильтрация в app, не в RLS | Больше городов в shared/cities |

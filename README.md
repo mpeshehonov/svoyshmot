@@ -51,7 +51,11 @@ npx supabase db reset
 
 1. Импортируй репозиторий в Vercel
 2. Root Directory: `apps/web`
-3. Env: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+3. Env: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `NEXT_PUBLIC_SITE_URL`
+
+## Документация
+
+Полный индекс: [docs/README.md](./docs/README.md) — architecture, MVP scope, PMF metrics, security, customer discovery.
 
 ## MVP-этапы
 

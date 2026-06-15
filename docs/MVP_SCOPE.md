@@ -60,19 +60,19 @@
 
 ## Risks (из stage-gates)
 
-- [ ] **Agentic tech debt** — нет ARCHITECTURE.md для агентов; RLS покрывает базу, но нет e2e-тестов.
+- [x] **Agentic tech debt** — `docs/ARCHITECTURE.md` для агентов; e2e — TODO.
 - [ ] **False PMF** — AI-картинки пока заглушка; ценность «увидеть себя в вещи» не проверена.
 - [ ] **Scope creep** — не добавлять оплату/маркетплейс фич до первых 3 matched заказов.
-- [ ] **Security** — RLS есть; нужен review перед массовым онбордингом ателье.
+- [ ] **Security** — чеклист в `docs/SECURITY.md`; полный sign-off перед масштабом.
 
 ## Next Moves (7 дней)
 
 1. Supabase Dashboard: Site URL = `https://svoyshmot.vercel.app` (письма подтверждения).
 2. Найти 3 ателье вручную (Telegram/Avito) — онбординг без рекламы.
-3. 5 тестовых заказов от знакомых / customer discovery.
-4. Stage 2: AI-генерация (1 провайдер, 4 варианта) — только после 1 успешного заказа без картинок.
-5. Написать `docs/ARCHITECTURE.md` для coding agents.
-6. Простая аналитика: Vercel Analytics или PostHog (activation funnel).
+3. 5 тестовых заказов от знакомых / customer discovery ([CUSTOMER_DISCOVERY.md](./CUSTOMER_DISCOVERY.md)).
+4. Stage 2: AI-генерация — только после gate ([STAGE2_AI.md](./STAGE2_AI.md)).
+5. Заполнить [PMF_DASHBOARD.md](./PMF_DASHBOARD.md) на первом review.
+6. Простая аналитика: Vercel Analytics или PostHog.
 
 ## Review Cadence
 

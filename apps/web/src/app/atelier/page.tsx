@@ -1,9 +1,17 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { SiteHeader } from "@/components/layout/site-header";
+import { getAtelierOnboardingPath } from "@/lib/atelier-routing";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function AtelierLandingPage() {
+export default async function AtelierLandingPage() {
+  const onboardingPath = await getAtelierOnboardingPath();
+
+  if (onboardingPath) {
+    redirect(onboardingPath);
+  }
+
   return (
     <div className="min-h-full">
       <SiteHeader />
@@ -18,12 +26,18 @@ export default function AtelierLandingPage() {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild>
-                <Link href="/register">Подключить ателье</Link>
+                <Link href="/register?role=atelier">Подключить ателье</Link>
               </Button>
               <Button asChild variant="secondary">
-                <Link href="/login">Уже есть аккаунт</Link>
+                <Link href="/login?next=/atelier/register">
+                  Уже есть аккаунт — войти
+                </Link>
               </Button>
             </div>
+            <p className="text-xs text-muted-foreground">
+              С аккаунтом клиента можно стать ателье — после входа откроется
+              форма профиля мастерской.
+            </p>
           </CardContent>
         </Card>
       </main>

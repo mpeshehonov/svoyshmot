@@ -60,6 +60,14 @@ export function SiteHeaderUser({
               </Link>
             </DropdownMenuItem>
           )}
+          {role === "atelier" ? null : (
+            <DropdownMenuItem asChild>
+              <Link href="/atelier/register">
+                <LayoutDashboard className="size-4" />
+                Стать ателье
+              </Link>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem disabled>
             <User className="size-4" />
